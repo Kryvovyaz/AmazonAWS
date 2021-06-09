@@ -9,13 +9,11 @@ import javax.inject.Inject
 
 class JobsContainerRepository @Inject constructor(private val jobsService: JobsService) :
     JobsContainerRepositoryImp {
-
-    override suspend fun fetchMemeContainer(): JobsContainerResult =
+    override suspend fun fetchJobContainer(): JobsContainerResult =
         withContext(Dispatchers.IO) {
-            val memeCall = jobsService.getJobs()
-
+            val jobCall = jobsService.getJobs()
             try {
-                val response = memeCall.execute()
+                val response = jobCall.execute()
                 val forecastContainer = response.body()
                 forecastContainer?.let {
                     return@withContext JobsContainerResult.Success(it)
@@ -24,7 +22,6 @@ class JobsContainerRepository @Inject constructor(private val jobsService: JobsS
                         Error(RESPONSE_PARSING_ERROR_MESSAGE)
                     )
                 }
-
             } catch (ex: Exception) {
                 return@withContext JobsContainerResult
                     .Failure(java.lang.Error(ex.message))

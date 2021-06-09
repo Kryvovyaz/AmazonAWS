@@ -2,4 +2,6 @@
     <string name="app_name">AmazonAWS</string>
     <string name="name">Name</string>
     <string name="id">listId</string>
+    <string name="job_s_name">Job\'s name</string>
+    <string name="logo">Logo</string>
 </resources>

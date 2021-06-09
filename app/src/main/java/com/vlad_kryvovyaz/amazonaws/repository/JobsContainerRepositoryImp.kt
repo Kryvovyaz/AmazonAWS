@@ -3,5 +3,5 @@ package com.vlad_kryvovyaz.amazonaws.repository
 import com.vlad_kryvovyaz.amazonaws.model.JobsContainerResult
 
 interface JobsContainerRepositoryImp {
-    suspend fun fetchMemeContainer(): JobsContainerResult
+    suspend fun fetchJobContainer(): JobsContainerResult
 }

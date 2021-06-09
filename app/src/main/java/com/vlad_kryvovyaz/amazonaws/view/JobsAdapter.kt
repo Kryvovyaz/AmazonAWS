@@ -1,4 +1,4 @@
-package com.vlad_kryvovyaz.amazonaws.View
+package com.vlad_kryvovyaz.amazonaws.view
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -49,11 +49,22 @@ class JobsAdapter : RecyclerView.Adapter<JobsAdapter.JobsViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: JobsViewHolder, position: Int) {
+        val job = differ.currentList[position]
+        holder.itemView.apply {
+            setOnClickListener {
+                onItemClickListener?.let { it(job) } //it refers to onItemClickListener
+            }
+        }
         holder.bind(position)
     }
 
     override fun getItemCount(): Int {
         Log.d("myTag", "${differ.currentList.size}")
         return differ.currentList.size
+    }
+    private var onItemClickListener: ((JobsContainer) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (JobsContainer) -> Unit) {
+        onItemClickListener = listener
     }
 }

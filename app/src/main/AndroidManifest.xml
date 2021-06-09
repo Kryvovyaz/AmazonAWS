@@ -4,13 +4,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/amazon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/amazon"
         android:supportsRtl="true"
         android:name="com.vlad_kryvovyaz.amazonaws.JobsApplication"
         android:theme="@style/Theme.AmazonAWS">
-        <activity android:name=".View.AmazonAWSActivity">
+        <activity android:name=".AmazonAWSActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

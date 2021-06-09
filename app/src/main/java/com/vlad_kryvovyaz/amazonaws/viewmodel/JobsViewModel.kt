@@ -1,4 +1,4 @@
-package com.vlad_kryvovyaz.viewmodel
+package com.vlad_kryvovyaz.amazonaws.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,11 +25,11 @@ class JobsViewModel @Inject constructor(private val jobsContainerRepository: Job
     fun fetchJobsContainer() {
         _jobsContainerResultLiveData.value = JobsContainerResult.IsLoading
         viewModelScope.launch {
-            _jobsContainerResultLiveData.value = jobsContainerRepository.fetchMemeContainer()
+            _jobsContainerResultLiveData.value = jobsContainerRepository.fetchJobContainer()
         }
     }
 
-   suspend fun sortList(jobsContainer: List<JobsContainer>): MutableList<JobsContainer> {
+    fun sortList(jobsContainer: List<JobsContainer>): MutableList<JobsContainer> {
         val list = jobsContainer
                 as MutableList<JobsContainer>
         list.removeIf { it.name.isNullOrEmpty() }

@@ -1,46 +1,51 @@
-package com.vlad_kryvovyaz.amazonaws.View
+package com.vlad_kryvovyaz.amazonaws.view.fragments
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vlad_kryvovyaz.amazonaws.databinding.ActivityAmazonawsBinding
+import com.vlad_kryvovyaz.amazonaws.view.JobsAdapter
+import com.vlad_kryvovyaz.amazonaws.databinding.ListOfJobsFragmentBinding
 import com.vlad_kryvovyaz.amazonaws.model.JobsContainer
 import com.vlad_kryvovyaz.amazonaws.model.JobsContainerResult
-import com.vlad_kryvovyaz.viewmodel.JobsViewModel
+import com.vlad_kryvovyaz.amazonaws.viewmodel.JobsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-class AmazonAWSActivity : AppCompatActivity() {
-    private lateinit var _binding: ActivityAmazonawsBinding
-    private val binding get() = _binding
+class ListOfJobsFragment : Fragment() {
+    private var _binding: ListOfJobsFragmentBinding? = null
+    private val binding get() = _binding!!
     val viewModel: JobsViewModel by viewModels()
     lateinit var jobsAdapter: JobsAdapter
-    val TAG = "ListOfJobs"
+    val TAG = "ListOfJobsFragment"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        _binding = ActivityAmazonawsBinding.inflate(layoutInflater)
-        setContentView(_binding.root)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         createRecycler()
-        viewModel.jobsContainerResultLiveData.observe(this,
+        viewModel.jobsContainerResultLiveData.observe(viewLifecycleOwner,
             Observer { jobsContainerResult ->
                 jobsContainerResult.let { it ->
                     when (it) {
                         is JobsContainerResult.Failure -> {
                             Log.d(TAG, "Failure")
                             Toast.makeText(
-                                this, "Something went wrong",
+                                context, "Something went wrong",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
                         is JobsContainerResult.IsLoading -> {
-                            _binding.progressBar.visibility = View.VISIBLE
+                            _binding?.progressBar?.visibility = View.VISIBLE
                             Log.d(TAG, " Loading")
                         }
                         is JobsContainerResult.Success -> {
@@ -64,5 +69,28 @@ class AmazonAWSActivity : AppCompatActivity() {
             adapter = jobsAdapter
             layoutManager = LinearLayoutManager(context)
         }
+
+        jobsAdapter.setOnItemClickListener {
+            val directions =
+                ListOfJobsFragmentDirections.actionFragmentListOfJobsToFragmentDetailsOfJob(
+                    it
+                )
+            findNavController()
+                .navigate(directions)
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        _binding = ListOfJobsFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
