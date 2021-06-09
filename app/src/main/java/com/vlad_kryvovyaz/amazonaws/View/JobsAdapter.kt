@@ -11,17 +11,17 @@ import com.vlad_kryvovyaz.amazonaws.model.JobsContainer
 
 class JobsAdapter : RecyclerView.Adapter<JobsAdapter.JobsViewHolder>() {
 
-    private val differCallback = object : DiffUtil.ItemCallback<JobsContainer.JobsContainerItem>() {
+    private val differCallback = object : DiffUtil.ItemCallback<JobsContainer>() {
         override fun areItemsTheSame(
-            oldItem: JobsContainer.JobsContainerItem,
-            newItem: JobsContainer.JobsContainerItem
+            oldItem: JobsContainer,
+            newItem: JobsContainer
         ): Boolean {
             return oldItem == newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: JobsContainer.JobsContainerItem,
-            newItem: JobsContainer.JobsContainerItem
+            oldItem: JobsContainer,
+            newItem: JobsContainer
         ): Boolean {
             return oldItem == newItem
         }

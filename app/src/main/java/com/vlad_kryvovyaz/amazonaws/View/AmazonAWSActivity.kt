@@ -1,4 +1,4 @@
-package com.vlad_kryvovyaz.amazonaws
+package com.vlad_kryvovyaz.amazonaws.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vlad_kryvovyaz.amazonaws.View.JobsAdapter
 import com.vlad_kryvovyaz.amazonaws.databinding.ActivityAmazonawsBinding
 import com.vlad_kryvovyaz.amazonaws.model.JobsContainer
 import com.vlad_kryvovyaz.amazonaws.model.JobsContainerResult
@@ -48,12 +47,11 @@ class AmazonAWSActivity : AppCompatActivity() {
                             binding.progressBar.visibility = View.INVISIBLE
                             Log.d(TAG, "Success")
                             CoroutineScope(Dispatchers.Default).launch {
-                                val list = viewModel.sortList(it.jobsContainer as JobsContainer)
+                                val list = viewModel.sortList(it.jobsContainer)
                                 withContext(Dispatchers.Main) {
-                                    jobsAdapter.differ.submitList(list)
+                                    jobsAdapter.differ.submitList(list as List<JobsContainer>?)
                                 }
                             }
-
                         }
                     }
                 }

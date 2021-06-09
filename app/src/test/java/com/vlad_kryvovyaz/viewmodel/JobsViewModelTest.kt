@@ -54,47 +54,20 @@ class JobsViewModelTest {
             viewModel.fetchJobsContainer()
         }
         val jobsContainer =
-            listOf<JobsContainer.JobsContainerItem>(
-                JobsContainer.JobsContainerItem(755, 2, ""),
-                JobsContainer.JobsContainerItem(684, 1, "Item 684"),
-                JobsContainer.JobsContainerItem(736, 3, null),
-                JobsContainer.JobsContainerItem(599, 1, null),
-                JobsContainer.JobsContainerItem(680, 3, "Item 680"),
-                JobsContainer.JobsContainerItem(231, 2, null),
-                JobsContainer.JobsContainerItem(681, 4, "Item 681"),
-                JobsContainer.JobsContainerItem(177, 1, null),
-                JobsContainer.JobsContainerItem(263, 1, ""),
-                JobsContainer.JobsContainerItem(969, 4, "Item 969"),
-                JobsContainer.JobsContainerItem(947, 2, null)
+            listOf<JobsContainer>(
+                JobsContainer(755, 2, ""),
+                JobsContainer(684, 1, "Item 684"),
+                JobsContainer(736, 3, null),
+                JobsContainer(599, 1, null),
+                JobsContainer(680, 3, "Item 680"),
+                JobsContainer(231, 2, null),
+                JobsContainer(681, 4, "Item 681"),
+                JobsContainer(177, 1, null),
+                JobsContainer(263, 1, ""),
+                JobsContainer(969, 4, "Item 969"),
+                JobsContainer(947, 2, null)
             )
         val result = viewModel.jobsContainerResultLiveData.value as JobsContainerResult.Success
         MatcherAssert.assertThat(result.jobsContainer, `is`(jobsContainer))
     }
-
-//    @Test
-//    suspend fun `fetch sort list and remove empty or null name values`() {
-//        val list = listOf<JobsContainer.JobsContainerItem>(
-//            JobsContainer.JobsContainerItem(755, 2, ""),
-//            JobsContainer.JobsContainerItem(684, 1, "Item 684"),
-//            JobsContainer.JobsContainerItem(736, 3, null),
-//            JobsContainer.JobsContainerItem(599, 1, null),
-//            JobsContainer.JobsContainerItem(680, 3, "Item 680"),
-//            JobsContainer.JobsContainerItem(231, 2, null),
-//            JobsContainer.JobsContainerItem(681, 4, "Item 681"),
-//            JobsContainer.JobsContainerItem(177, 1, null),
-//            JobsContainer.JobsContainerItem(263, 1, ""),
-//            JobsContainer.JobsContainerItem(969, 4, "Item 969"),
-//            JobsContainer.JobsContainerItem(947, 2, null)
-//        )
-//                as MutableList<JobsContainer.JobsContainerItem>
-//
-//        list.removeIf { it.name.isNullOrEmpty() }
-//        list.sortedWith(
-//            compareBy<JobsContainer.JobsContainerItem> { it.listId }
-//                .thenBy {
-//                    it.name?.substring(5, it.name!!.length)?.toInt()
-//                }) as MutableList<JobsContainer.JobsContainerItem>
-//        val result = viewModel.sortList(list as JobsContainer)
-//        Assert.assertEquals(4, result.size)
-//    }
 }

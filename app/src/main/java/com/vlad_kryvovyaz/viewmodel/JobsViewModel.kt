@@ -29,14 +29,14 @@ class JobsViewModel @Inject constructor(private val jobsContainerRepository: Job
         }
     }
 
-    fun sortList(jobsContainer: JobsContainer): MutableList<JobsContainer.JobsContainerItem> {
+   suspend fun sortList(jobsContainer: List<JobsContainer>): MutableList<JobsContainer> {
         val list = jobsContainer
-                as MutableList<JobsContainer.JobsContainerItem>
+                as MutableList<JobsContainer>
         list.removeIf { it.name.isNullOrEmpty() }
         return list.sortedWith(
-            compareBy<JobsContainer.JobsContainerItem> { it.listId }
+            compareBy<JobsContainer> { it.listId }
                 .thenBy {
                     it.name?.substring(5, it.name.length)?.toInt()
-                }) as MutableList<JobsContainer.JobsContainerItem>
+                }) as MutableList<JobsContainer>
     }
 }

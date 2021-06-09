@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface JobsService {
     @GET("/hiring.json")//indicate how a request will be handled.
-    fun getJobs(): Call<JobsContainer>
+    fun getJobs(): Call<List<JobsContainer>>
 }

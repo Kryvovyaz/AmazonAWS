@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:name="com.vlad_kryvovyaz.amazonaws.JobsApplication"
         android:theme="@style/Theme.AmazonAWS">
-        <activity android:name=".AmazonAWSActivity">
+        <activity android:name=".View.AmazonAWSActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
