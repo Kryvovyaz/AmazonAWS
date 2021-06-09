@@ -9,10 +9,10 @@
         android:id="@+id/logo"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:contentDescription="@string/logo"
         android:src="@drawable/amazon"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/listId"

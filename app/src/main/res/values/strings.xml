@@ -4,4 +4,6 @@
     <string name="id">listId</string>
     <string name="job_s_name">Job\'s name</string>
     <string name="logo">Logo</string>
+    <string name="failure">Failure</string>
+    <string name="something_went_wrong">Something went wrong</string>
 </resources>

@@ -11,6 +11,7 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.Is.`is`
@@ -20,7 +21,7 @@ import javax.inject.Inject
 @UninstallModules(RepositoryModule::class)
 @ExperimentalCoroutinesApi
 @HiltAndroidTest
-class MemeViewModelTest {
+class JobsViewModelTest {
     private lateinit var viewModel: JobsViewModel
 
     @get:Rule
@@ -43,6 +44,7 @@ class MemeViewModelTest {
         fakeRepository.shouldNetworkSuccess = true
         runBlockingTest {
             viewModel.fetchJobsContainer()
+            delay(200)
         }
         val jobsContainer = listOf(
             JobsContainer(684, 1, "Item 684"),

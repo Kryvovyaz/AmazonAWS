@@ -20,7 +20,6 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -29,7 +28,7 @@ import javax.inject.Singleton
 @ExperimentalCoroutinesApi
 @UninstallModules(RepositoryModule::class)
 @HiltAndroidTest
-class FragmentListOfJobsTest {
+class ListOfJobsFragmentTest {
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
@@ -55,9 +54,12 @@ class FragmentListOfJobsTest {
      */
     @Test
     fun test_selectListItem_isFragmentDetailsOfJobsVisible() {
-        onView(withId(R.id.recyclerView)).perform(actionOnItemAtPosition<JobsAdapter.JobsViewHolder>(
-            LIST_ITEM_IN_TEST,
-            click()))
+        onView(withId(R.id.recyclerView)).perform(
+            actionOnItemAtPosition<JobsAdapter.JobsViewHolder>(
+                LIST_ITEM_IN_TEST,
+                click()
+            )
+        )
         onView(withId(R.id.job_name_details)).check(matches(withText(JOB_IN_TEST.name)))
     }
 
@@ -66,8 +68,11 @@ class FragmentListOfJobsTest {
      */
     @Test
     fun test_backNavigation_to_FragmentListsOfJobs() {
-        onView(withId(R.id.recyclerView)).perform(actionOnItemAtPosition<JobsAdapter.JobsViewHolder>(
-            LIST_ITEM_IN_TEST, click()))
+        onView(withId(R.id.recyclerView)).perform(
+            actionOnItemAtPosition<JobsAdapter.JobsViewHolder>(
+                LIST_ITEM_IN_TEST, click()
+            )
+        )
         onView(withId(R.id.job_name_details)).check(matches(withText(JOB_IN_TEST.name)))
         pressBack()
         onView(withId(R.id.recyclerView)).check(matches(isDisplayed()))

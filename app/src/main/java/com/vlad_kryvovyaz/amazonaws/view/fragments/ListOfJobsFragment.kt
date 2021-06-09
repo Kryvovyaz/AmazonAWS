@@ -11,10 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.vlad_kryvovyaz.amazonaws.R
 import com.vlad_kryvovyaz.amazonaws.view.JobsAdapter
 import com.vlad_kryvovyaz.amazonaws.databinding.ListOfJobsFragmentBinding
 import com.vlad_kryvovyaz.amazonaws.model.JobsContainer
 import com.vlad_kryvovyaz.amazonaws.model.JobsContainerResult
+import com.vlad_kryvovyaz.amazonaws.utils.TAG
 import com.vlad_kryvovyaz.amazonaws.viewmodel.JobsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -28,7 +30,7 @@ class ListOfJobsFragment : Fragment() {
     private val binding get() = _binding!!
     val viewModel: JobsViewModel by viewModels()
     lateinit var jobsAdapter: JobsAdapter
-    val TAG = "ListOfJobsFragment"
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,9 +40,9 @@ class ListOfJobsFragment : Fragment() {
                 jobsContainerResult.let { it ->
                     when (it) {
                         is JobsContainerResult.Failure -> {
-                            Log.d(TAG, "Failure")
+                            Log.d(TAG, getString(R.string.failure))
                             Toast.makeText(
-                                context, "Something went wrong",
+                                context, getString(R.string.something_went_wrong),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }

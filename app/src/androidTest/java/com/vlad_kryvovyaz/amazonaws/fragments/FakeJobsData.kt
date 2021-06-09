@@ -2,9 +2,8 @@ package com.vlad_kryvovyaz.amazonaws.fragments
 
 import com.vlad_kryvovyaz.amazonaws.model.JobsContainer
 
-
 object FakeJobsContainerData {
-    val jobs: List<JobsContainer> =  listOf(
+    val jobs: List<JobsContainer> = listOf(
         JobsContainer(684, 1, "Item 684"),
         JobsContainer(680, 3, "Item 680"),
         JobsContainer(681, 4, "Item 681"),
