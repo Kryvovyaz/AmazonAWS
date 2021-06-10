@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorDestinationBuilder
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vlad_kryvovyaz.amazonaws.R
@@ -73,8 +74,7 @@ class ListOfJobsFragment : Fragment() {
         }
 
         jobsAdapter.setOnItemClickListener {
-            val directions =
-                ListOfJobsFragmentDirections.actionFragmentListOfJobsToFragmentDetailsOfJob(
+            val directions = ListOfJobsFragmentDirections.actionListOfJobsFragmentToFragmentDetailsOfJob(
                     it
                 )
             findNavController()
